@@ -117,13 +117,13 @@ categoryid：
 
 page：
 
-- 类型：number
+- 类型：数字
 - 默认值：无
 - 描述：返回第几页，必须大于等于1，不填默认为1
 
 pagesize：
 
-- 类型：number
+- 类型：数字
 - 默认值：10
 - 描述：返回的每页的条数
 
@@ -136,25 +136,25 @@ ret：
 
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-track_title | String | 声音名称
-track_tags | String | 声音标签列表
-track_intro | String | 声音简介
-cover_url_small | String | 声音封面小图
-cover_url_middle  |  String | 声音封面中图
-cover_url_large | String | 声音封面大图
-duration   | Int类型  | 声音时长，单位秒
-play_count | Int | 播放数 
-favorite_count | Int | 喜欢数 
-comment_count |  Int  |评论数
-download_count | Int |下载次数
-play_url_32 | String | 播放地址32位
-play_size_32   | Int | 32位声音文件大小
-play_url_24_m4a | String | 声音m4a格式24位地址
-play_size_24_m4a  |  Int |声音m4a格式24位大小
+track_title | 字符串 | 声音名称
+track_tags | 字符串 | 声音标签列表
+track_intro | 字符串 | 声音简介
+cover_url_small | 字符串 | 声音封面小图
+cover_url_middle  |  字符串 | 声音封面中图
+cover_url_large | 字符串 | 声音封面大图
+duration   | 数字  | 声音时长，单位秒
+play_count | 数字 | 播放数 
+favorite_count | 数字 | 喜欢数 
+comment_count |  数字  |评论数
+download_count | 数字 |下载次数
+play_url_32 | 字符串 | 播放地址32位
+play_size_32   | 数字 | 32位声音文件大小
+play_url_24_m4a | 字符串 | 声音m4a格式24位地址
+play_size_24_m4a  |  数字 |声音m4a格式24位大小
 can_download  |  Bool   | 可否下载，true-可下载，false-不可下载
-download_url  |  String | 声音下载地址
-download_size | Int | 声音下载大小
-order_num  | Int | 一条声音在一个专辑中的位置
+download_url  |  数字 | 声音下载地址
+download_size | 数字 | 声音下载大小
+order_num  | 数字 | 一条声音在一个专辑中的位置
 
 ```js
 {
@@ -202,13 +202,14 @@ err：
 ```js
 var ximalaya = api.require('ximalaya');
 var param = {
-        keyword:"爱情",
-    };
+    keyword:"爱情",
+};
 ximalaya.getSearchedTracks(param, function(ret, err){
-    if(ret)
+    if(ret){
         console.log(JSON.stringify(ret));
-    else
+    }else{
         console.log(JSON.stringify(err));
+    }
 });
 ```
 
