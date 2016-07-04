@@ -18,8 +18,6 @@
 
 本模块封装了喜马拉雅的声音获取的功能，声音最终返回的是mp3或者aac等格式的URL,你需要集成其他的模块比如"netAudio"来播放声音
 
->使用须知
-
 1、使用此模块需要先在喜马拉雅平台完成注册，并得到对应的key，[传送门](http://open.ximalaya.com/doc/18)
 
 2、得到了appkey，appsecret后，参考[接入演示](https://github.com/bringmehome/ximalaya)
@@ -77,9 +75,9 @@ var param = {
 };
 ximalaya.initXmly(param, function(ret, err){
     if(ret)
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
@@ -207,9 +205,9 @@ var param = {
 };
 ximalaya.getSearchedTracks(param, function(ret, err){
   if(ret)
-    console.log(JSON.stringify(ret));
+    alert(JSON.stringify(ret));
   else
-    console.log(JSON.stringify(err));
+    alert(JSON.stringify(err));
 });
 ```
 
@@ -278,9 +276,9 @@ err：
 var ximalaya = api.require('ximalaya');
 ximalaya.getCategories(function(ret, err){
   if(ret)
-    console.log(JSON.stringify(ret));
+    alert(JSON.stringify(ret));
   else
-    console.log(JSON.stringify(err));
+    alert(JSON.stringify(err));
 });
 ```
 
@@ -298,7 +296,7 @@ ximalaya.getCategories(function(ret, err){
 #**getHotTracks**
 <div id="getHotTracks"></div>
 
-    初始化模块信息，打开页面require完成就应该去执行
+    根据分类和标签获取热门声音列表
 
     getHotTracks({params}, function(ret, err))
 
@@ -404,9 +402,9 @@ var param = {
 };
 ximalaya.getHotTracks(param, function(ret, err) {
     if (ret)
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
@@ -518,9 +516,9 @@ var param = {
 };
 ximalaya.getAlbumlist(param, function(ret, err) {
     if (ret)
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
@@ -651,9 +649,9 @@ var param = {
 };
 ximalaya.getTracks(param, function(ret, err) {
     if (ret)
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
