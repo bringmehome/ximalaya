@@ -510,7 +510,7 @@ err：
 ```js
 var param = {
     categoryid: "1",
-    calcdimension: "1",
+    calcdimension: 1,
     page: 2,
     pagesize: 5
 };
