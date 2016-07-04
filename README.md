@@ -19,7 +19,7 @@
 4、解压后将其中的文件复制到自己的测试项目中，运行看看效果，是不是这个样子
 
 
-![](./img/xiaoguo.png)
+![](./img/xmlyapp.png)
 
 
 <div id="finalver"></div>
