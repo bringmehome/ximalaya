@@ -25,8 +25,20 @@
 <div id="finalver"></div>
 #**打正式包**
 
-因为调用喜马拉雅接口，需要先初始化，初始化的时候喜马拉雅会做身份校验
+接口测试完成后可以打正式包了，因为调用喜马拉雅接口，需要先初始化，初始化的时候喜马拉雅会做身份校验这时候需要传人appkey，appsecret, Android客户端包名，于是需要完成以下几步
 
 >1、创建应用获取appkey, appsecret, Android客户端包名, [创建应用](http://open.ximalaya.com/apps)
 
->2、
+>2、解压自定义模块ximalayakey.zip
+
+>3、编辑AndroidManifest.xml文件，修改其中的app_key和pack_id的value
+
+![](./img/manifest.png)
+
+>4、压缩文件夹为zip格式，替换之前测试用的自定义模块
+
+![](./img/package.png)
+
+如果还有其他问题请邮件(bringmehome@vip.qq.com)
+
+(完)
