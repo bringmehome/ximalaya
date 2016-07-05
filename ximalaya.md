@@ -1,4 +1,17 @@
-##描述: ximalaya
+/*
+Title: ximalaya
+Description: ximalaya
+*/
+
+<p style="color: #ccc; margin-bottom: 30px;">来自于：开发者</p>
+
+<ul id="tab" class="clearfix">
+  <li class="active"><a href="#method-content">Method</a></li>
+</ul>
+   
+<div id="method-content"></div>
+
+<div class="outline">
 
 * [initXmly](#initXmly)
 
@@ -18,9 +31,9 @@
 
 本模块封装了喜马拉雅的声音获取的功能，声音最终返回的是mp3或者aac等格式的URL,你需要集成其他的模块比如"netAudio"来播放声音
 
-1、使用此模块需要先在喜马拉雅平台完成注册，并得到对应的key，[传送门](http://open.ximalaya.com/doc/18)
+1、使用此模块需要先在喜马拉雅平台完成注册，并得到对应的key，<a href="http://open.ximalaya.com/doc/18" target="_blank">喜马拉雅开放平台</a>
 
-2、得到了appkey，appsecret后，参考[接入演示](https://github.com/bringmehome/ximalaya)
+2、得到了appkey，appsecret后，参考<a href="https://github.com/bringmehome/ximalaya" target="_blank">GitHub接入教程</a>
 
 
 #**initXmly**
@@ -36,7 +49,7 @@ appsecret：
 
 - 类型：字符串
 - 默认值：无，如果你使用的是github里提供的测试模块这里的appsecret可以传(e1f6e1927fdab1ef1a8de1997557b6db)
-- 描述：喜马拉雅开发平台申请我的应用时候得到的appsecret，[我的应用](http://open.ximalaya.com/apps)
+- 描述：喜马拉雅开发平台申请我的应用时候得到的appsecret，<a href="http://open.ximalaya.com/apps" target="_blank">喜马拉雅我的应用</a>
 
 ##callback(ret,err)
 
