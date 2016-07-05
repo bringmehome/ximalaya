@@ -13,19 +13,19 @@ Description: ximalaya
 
 <div class="outline">
 
-* [initXmly](#initXmly)
+[initXmly](#initXmly)
 
-* [getSearchedTracks](#getSearchedTracks)
+[getSearchedTracks](#getSearchedTracks)
 
-* [getCategories](#getCategories)
+[getCategories](#getCategories)
 
-* [getHotTracks](#getHotTracks)
+[getHotTracks](#getHotTracks)
 
-* [getAlbumlist](#getAlbumlist)
+[getAlbumlist](#getAlbumlist)
 
-* [getTracks](#getTracks)
+[getTracks](#getTracks)
 
-* [错误码](#errcode)
+[错误码](#errcode)
 
 </div>
 
