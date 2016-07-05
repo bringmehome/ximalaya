@@ -27,6 +27,8 @@ Description: ximalaya
 
 * [错误码](#errcode)
 
+</div>
+
 ##**概述**
 
 本模块封装了喜马拉雅的声音获取的功能，声音最终返回的是mp3或者aac等格式的URL,你需要集成其他的模块比如"netAudio"来播放声音
