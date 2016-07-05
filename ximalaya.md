@@ -11,7 +11,7 @@ Description: ximalaya
    
 <div id="method-content"></div>
 
-<div class="outline">
+<div class="outline"></div>
 
 [initXmly](#initXmly)
 
@@ -26,8 +26,6 @@ Description: ximalaya
 [getTracks](#getTracks)
 
 [错误码](#errcode)
-
-</div>
 
 ##**概述**
 
