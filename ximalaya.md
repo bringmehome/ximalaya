@@ -442,7 +442,7 @@ ximalaya.getTags(param, function(ret, err) {
 
 categoryid：
 
-- 类型：字符串
+- 类型：数字
 - 默认值：无
 - 描述：分类ID，指定分类
 
