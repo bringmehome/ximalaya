@@ -59,7 +59,7 @@ Description: ximalaya
 
 ##**概述**
 
-本模块封装了喜马拉雅的声音获取的功能，声音最终返回的是mp3或者aac等格式的URL,你需要集成其他的模块来播放声音,比如"netAudio"
+本模块封装了喜马拉雅的声音获取的功能，声音最终返回的是mp3或者aac等格式的URL,你需要集成其他的模块来播放声音,比如"netAudio"；而电台播放的部分你可以使用自带的播放器播放
 
 1、使用此模块需要先在喜马拉雅平台完成注册，并得到对应的key，<a href="http://open.ximalaya.com/doc/18" target="_blank">喜马拉雅开放平台</a>
 
@@ -331,9 +331,9 @@ var param = {
 };
 ximalaya.getSearchedTracks(param, function(ret, err){
   if(ret)
-    console.log(JSON.stringify(ret));
+    alert(JSON.stringify(ret));
   else
-    console.log(JSON.stringify(err));
+    alert(JSON.stringify(err));
 });
 ```
 
@@ -415,9 +415,9 @@ var param = {
 };
 ximalaya.getTags(param, function(ret, err) {
     if (ret)
-        console.log("getTags", JSON.stringify(ret));
+        alert("getTags", JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
@@ -558,9 +558,9 @@ var param = {
 };
 ximalaya.getHotTracks(param, function(ret, err) {
     if (ret)
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
@@ -694,9 +694,9 @@ var param = {
 };
 ximalaya.getAlbumlist(param, function(ret, err) {
     if (ret)
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
@@ -838,9 +838,9 @@ var param = {
 };
 ximalaya.getTracks(param, function(ret, err) {
     if (ret)
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
@@ -907,9 +907,9 @@ err：
 var ximalaya = api.require('ximalaya');
 ximalaya.getProvinces(function(ret, err) {
     if (ret)
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
@@ -1042,9 +1042,9 @@ var param = {
 };
 ximalaya.getRadios(param, function(ret, err){
   if(ret)
-    console.log(JSON.stringify(ret));
+    alert(JSON.stringify(ret));
   else
-    console.log(JSON.stringify(err));
+    alert(JSON.stringify(err));
 });
 ```
 
@@ -1096,9 +1096,9 @@ err：
 ```js
 ximalaya.XmPlayerInit(function(ret, err){
   if(ret)
-    console.log(JSON.stringify(ret));
+    alert(JSON.stringify(ret));
   else
-    console.log(JSON.stringify(err));
+    alert(JSON.stringify(err));
 });
 ```
 
@@ -1172,9 +1172,9 @@ var param = {
 };
 ximalaya.XmPlayerPlay(param, function(ret, err){
   if(ret)
-    console.log(JSON.stringify(ret));
+    alert(JSON.stringify(ret));
   else
-    console.log(JSON.stringify(err));
+    alert(JSON.stringify(err));
 });
 ```
 
@@ -1227,9 +1227,9 @@ err：
 var ximalaya = api.require('ximalaya');
 ximalaya.XmPlayerPause(function(ret, err) {
     if (ret)
-        console.log("Pause", JSON.stringify(ret));
+        alert("Pause", JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
@@ -1282,9 +1282,9 @@ err：
 var ximalaya = api.require('ximalaya');
 ximalaya.XmPlayerStop(function(ret, err) {
     if (ret)
-        console.log("Stop", JSON.stringify(ret));
+        alert("Stop", JSON.stringify(ret));
     else
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
 });
 ```
 
