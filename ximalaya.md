@@ -11,7 +11,6 @@ Description: ximalaya
    
 <div id="method-content"></div>
 
-<div class="outline">
 
 [initXmly](#initXmly)
 
@@ -55,7 +54,6 @@ Description: ximalaya
 
 [radio](#radio)
 
-</div>
 
 ##**概述**
 
