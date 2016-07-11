@@ -15,9 +15,11 @@ Description: ximalaya
 
 [initXmly](#initXmly)
 
+[getCategories](#getCategories)
+
 [getSearchedTracks](#getSearchedTracks)
 
-[getCategories](#getCategories)
+[getTags](#getTags)
 
 [getHotTracks](#getHotTracks)
 
@@ -25,13 +27,39 @@ Description: ximalaya
 
 [getTracks](#getTracks)
 
+[getProvinces](#getProvinces)
+
+[getRadios](#getRadios)
+
+[XmPlayerInit](#XmPlayerInit)
+
+[XmPlayerPlay](#XmPlayerPlay)
+
+[XmPlayerPause](#XmPlayerPause)
+
+[XmPlayerStop](#XmPlayerStop)
+
 [错误码](#errcode)
+
+[track](#track)
+
+[announcer](#announcer)
+
+[album](#album)
+
+[SubordinatedAlbum](#SubordinatedAlbum)
+
+[Category](#Category)
+
+[Province](#Province)
+
+[radio](#radio)
 
 </div>
 
 ##**概述**
 
-本模块封装了喜马拉雅的声音获取的功能，声音最终返回的是mp3或者aac等格式的URL,你需要集成其他的模块比如"netAudio"来播放声音
+本模块封装了喜马拉雅的声音获取的功能，声音最终返回的是mp3或者aac等格式的URL,你需要集成其他的模块来播放声音,比如"netAudio"
 
 1、使用此模块需要先在喜马拉雅平台完成注册，并得到对应的key，<a href="http://open.ximalaya.com/doc/18" target="_blank">喜马拉雅开放平台</a>
 
@@ -77,7 +105,7 @@ err：
 ```js
 {
   "code": 9001,
-  "message": "already initialized"
+  "message": "Already initialized"
 }
 ```
 
@@ -106,6 +134,75 @@ ximalaya.initXmly(param, function(ret, err){
 
     可提供的1.0.0及更高版本
 
+#**getCategories**
+<div id="getCategories"></div>
+
+    获取喜马拉雅的内容分类
+
+    getCategories(function(ret, err))
+
+##callback(ret,err)
+
+ret：
+
+- 类型：JSON对象
+- 说明：categories [内容分类](#category)
+
+```js
+{
+  "categories": [
+    {
+      "order_num": 1,
+      "category_name": "资讯",
+      "cover_url_small": "http://fdfs.xmcdn.com/group16/M05/17/DD/wKgDbFVxNDnBP5BhAAAGSmFXT7I057.png",
+      "cover_url_middle": "http://fdfs.xmcdn.com/group16/M05/17/DD/wKgDbFVxNDnjLKBmAAAGSmFXT7I174.png",
+      "cover_url_large": "http://fdfs.xmcdn.com/group16/M05/17/DD/wKgDbFVxNDnjLKBmAAAGSmFXT7I174.png"
+    },
+    {
+      "order_num": 2,
+      "category_name": "音乐",
+      "cover_url_small": "http://fdfs.xmcdn.com/group12/M08/17/A2/wKgDW1VxM-3hix-3AAAGGBNsGas721.png",
+      "cover_url_middle": "http://fdfs.xmcdn.com/group12/M08/17/A0/wKgDXFVxM-LyPrvZAAAGGBNsGas270.png",
+      "cover_url_large": "http://fdfs.xmcdn.com/group12/M08/17/A0/wKgDXFVxM-LyPrvZAAAGGBNsGas270.png"
+    }
+  ]
+}
+```
+
+err：
+
+- 类型：JSON对象
+
+内部字段：
+
+```js
+{
+  "code": 9002,
+  "message": "Uninitialized"
+}
+```
+
+##示例代码
+
+```js
+var ximalaya = api.require('ximalaya');
+ximalaya.getCategories(function(ret, err){
+  if(ret)
+    alert(JSON.stringify(ret));
+  else
+    alert(JSON.stringify(err));
+});
+```
+
+##补充说明
+
+    无
+
+##可用性
+
+    Android系统, iOS系統
+
+    可提供的1.0.0及更高版本
 
 #**getSearchedTracks**
 <div id="getSearchedTracks"></div>
@@ -148,49 +245,62 @@ ret：
 
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-track_title | 字符串 | 声音名称
-track_tags | 字符串 | 声音标签列表
-track_intro | 字符串 | 声音简介
-cover_url_small | 字符串 | 声音封面小图
-cover_url_middle  |  字符串 | 声音封面中图
-cover_url_large | 字符串 | 声音封面大图
-duration   | 数字  | 声音时长，单位秒
-play_count | 数字 | 播放数 
-favorite_count | 数字 | 喜欢数 
-comment_count |  数字  |评论数
-download_count | 数字 |下载次数
-play_url_32 | 字符串 | 播放地址32位
-play_size_32   | 数字 | 32位声音文件大小
-play_url_24_m4a | 字符串 | 声音m4a格式24位地址
-play_size_24_m4a  |  数字 |声音m4a格式24位大小
-can_download  |  Bool   | 可否下载，true-可下载，false-不可下载
-download_url  |  数字 | 声音下载地址
-download_size | 数字 | 声音下载大小
-order_num  | 数字 | 一条声音在一个专辑中的位置
+total_count | 数字 | 声音总个数
+total_page | 数字 | 声音总页数
+tracks | JSON | [声音列表](#track)
 
 ```js
 {
-  "result": [
+  "total_count": 475,
+  "total_page": 159,
+  "tracks": [
     {
-      "track_title": "单面爱情",
-      "track_tags": "故事,治愈,温暖,片刻,随笔",
-      "track_intro": "用声音交换世界",
-      "cover_url_small": "http://fdfs.xmcdn.com/group5/M04/E3/89/wKgDtVSOl6TxfG9NAAGO_vkIqwY278_web_meduim.jpg",
-      "cover_url_middle": "http://fdfs.xmcdn.com/group5/M04/E3/89/wKgDtVSOl6TxfG9NAAGO_vkIqwY278_web_large.jpg",
-      "cover_url_large": "http://fdfs.xmcdn.com/group5/M04/E3/89/wKgDtVSOl6TxfG9NAAGO_vkIqwY278_mobile_large.jpg",
-      "duration": 1035,
-      "play_count": 1373,
-      "favorite_count": 5,
-      "comment_count": 3,
+      "id": 15044519,
+      "kind": "track",
+      "track_title": "2012年8月16日“1063会客厅”--晓琳的爱情",
+      "track_tags": "爱情",
+      "track_intro": "2012年8月16日“1063会客厅”--晓琳的爱情",
+      "cover_url_small": "http://fdfs.xmcdn.com/group8/M03/45/4F/wKgDYVcPbRnBkShsAAMuxLWEITo931_web_meduim.jpg",
+      "cover_url_middle": "http://fdfs.xmcdn.com/group8/M03/45/4F/wKgDYVcPbRnBkShsAAMuxLWEITo931_web_large.jpg",
+      "cover_url_large": "http://fdfs.xmcdn.com/group8/M03/45/4F/wKgDYVcPbRnBkShsAAMuxLWEITo931_mobile_large.jpg",
+      "announcer": {
+        "id": 45892933,
+        "vcategory_id": 0,
+        "nickname": "真我风采网络电台",
+        "avatar_url": "http://fdfs.xmcdn.com/group10/M03/34/39/wKgDaVb92VvwPqQ7AAEYxcnPdRo044_web_large.jpg",
+        "follower_count": 0,
+        "following_count": 0,
+        "released_album_count": 0,
+        "released_track_count": 0,
+        "is_verified": true
+      },
+      "duration": 1779,
+      "play_count": 49,
+      "favorite_count": 0,
+      "comment_count": 0,
       "download_count": 0,
-      "play_url_32": "http://fdfs.xmcdn.com/group5/M05/E2/A8/wKgDtlSOlovTwR05AD9VMnMC_vI747.mp3",
-      "play_size_32": 4150578,
-      "play_url_24_m4a": "http://audio.xmcdn.com/group7/M0A/51/C5/wKgDX1W1KVOx8QtpADDiOiLNwBA700.m4a",
-      "play_size_24_m4a": "3203642",
+      "play_url_32": "http://fdfs.xmcdn.com/group11/M08/61/EA/wKgDbVci1cjC2NYuAGyXxW6Re9Q985.mp3",
+      "play_size_32": 7116741,
+      "play_url_64": "http://fdfs.xmcdn.com/group13/M02/57/46/wKgDXVci1WOSF4g9ANkvXLkuurs474.mp3",
+      "play_size_64": 14233436,
+      "play_url_24_m4a": "http://audio.xmcdn.com/group13/M02/57/28/wKgDXlci1WeyTmH5AFPN_WnH5c0527.m4a",
+      "play_size_24_m4a": "5492221",
+      "play_url_64_m4a": "http://audio.xmcdn.com/group13/M02/57/28/wKgDXlci1W3BMfXsANuNJ5RDsr4084.m4a",
+      "play_size_64_m4a": "14388519",
       "can_download": true,
-      "download_url": "http://download.xmcdn.com/group5/M05/E2/A8/wKgDtlSOln_h874vAEG4Tac1P3s358.aac",
-      "download_size": 4307021,
-      "order_num": 675
+      "download_url": "http://download.xmcdn.com/group13/M02/57/28/wKgDXlci1V_Qx-oxAHCvStWeZXE745.aac",
+      "download_size": 7384906,
+      "order_num": 0,
+      "subordinated_album": {
+        "id": 4078979,
+        "album_title": "媒体报道",
+        "cover_url_small": "http://fdfs.xmcdn.com/group8/M03/45/4F/wKgDYVcPbRXjWXMWAAMuxLWEITo094_mobile_small.jpg",
+        "cover_url_middle": "http://fdfs.xmcdn.com/group8/M03/45/4F/wKgDYVcPbRXjWXMWAAMuxLWEITo094_mobile_meduim.jpg",
+        "cover_url_large": "http://fdfs.xmcdn.com/group8/M03/45/4F/wKgDYVcPbRXjWXMWAAMuxLWEITo094_mobile_large.jpg"
+      },
+      "source": 2,
+      "updated_at": 1467848133000,
+      "created_at": 1461901027000
     }
   ]
 }
@@ -205,7 +315,7 @@ err：
 ```js
 {
   "code": 9002,
-  "message": "uninitialized"
+  "message": "Uninitialized"
 }
 ```
 
@@ -214,15 +324,16 @@ err：
 ```js
 var ximalaya = api.require('ximalaya');
 var param = {
-    keyword:"爱情",
+    keyword:"大海",
+    categoryid:1,
     page:1,
     pagesize:2
 };
 ximalaya.getSearchedTracks(param, function(ret, err){
   if(ret)
-    alert(JSON.stringify(ret));
+    console.log(JSON.stringify(ret));
   else
-    alert(JSON.stringify(err));
+    console.log(JSON.stringify(err));
 });
 ```
 
@@ -237,12 +348,26 @@ ximalaya.getSearchedTracks(param, function(ret, err){
     可提供的1.0.0及更高版本
 
 
-#**getCategories**
-<div id="getCategories"></div>
+#**getTags**
+<div id="getTags"></div>
 
-    获取喜马拉雅的内容分类
+    获取专辑标签或者声音标签
 
-    getCategories(function(ret, err))
+    getTags({param}, function(ret, err))
+
+##params
+
+categoryid：
+
+- 类型：数字
+- 默认值：无
+- 描述：分类ID，指定分类，为0时表示热门分类
+
+type：
+
+- 类型：数字
+- 默认值：无，
+- 描述：指定查询的是专辑标签还是声音标签，0-专辑标签，1-声音标签
 
 ##callback(ret,err)
 
@@ -252,21 +377,16 @@ ret：
 
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-order_num | 数字 | 排序值，值越小排序越在前
-category_name | 字符串 | 分类名
-cover_url_small | 字符串 | 分类封面小图
-cover_url_middle | 字符串 | 分类封面中图
-cover_url_large | 字符串 | 分类封面大图
+tag_name | 字符串 | 标签名
 
 ```js
 {
-  "result": [
+  "tags": [
     {
-      "order_num": 1,
-      "category_name": "资讯",
-      "cover_url_small": "http://fdfs.xmcdn.com/group16/M05/17/DD/wKgDbFVxNDnBP5BhAAAGSmFXT7I057.png",
-      "cover_url_middle": "http://fdfs.xmcdn.com/group16/M05/17/DD/wKgDbFVxNDnjLKBmAAAGSmFXT7I174.png",
-      "cover_url_large": "http://fdfs.xmcdn.com/group16/M05/17/DD/wKgDbFVxNDnjLKBmAAAGSmFXT7I174.png"
+      "tag_name": "热血体育"
+    },
+    {
+      "tag_name": "科技之声"
     }
   ]
 }
@@ -281,7 +401,7 @@ err：
 ```js
 {
   "code": 9002,
-  "message": "uninitialized"
+  "message": "Uninitialized"
 }
 ```
 
@@ -289,11 +409,15 @@ err：
 
 ```js
 var ximalaya = api.require('ximalaya');
-ximalaya.getCategories(function(ret, err){
-  if(ret)
-    alert(JSON.stringify(ret));
-  else
-    alert(JSON.stringify(err));
+var param = {
+    categoryid: 1,
+    type: 0
+};
+ximalaya.getTags(param, function(ret, err) {
+    if (ret)
+        console.log("getTags", JSON.stringify(ret));
+    else
+        console.log(JSON.stringify(err));
 });
 ```
 
@@ -306,7 +430,6 @@ ximalaya.getCategories(function(ret, err){
     Android系统, iOS系統
 
     可提供的1.0.0及更高版本
-
 
 #**getHotTracks**
 <div id="getHotTracks"></div>
@@ -322,6 +445,12 @@ categoryid：
 - 类型：字符串
 - 默认值：无
 - 描述：分类ID，指定分类
+
+tagname：
+
+- 类型：字符串
+- 默认值：无
+- 描述：分类下对应声音标签，不填则为热门分类
 
 page：
 
@@ -343,51 +472,62 @@ ret：
 
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-track_title | 字符串 | 声音名称
-track_tags | 字符串 | 声音标签列表
-track_intro | 字符串 | 声音简介
-cover_url_small | 字符串 | 声音封面小图
-cover_url_middle  |  字符串 | 声音封面中图
-cover_url_large | 字符串 | 声音封面大图
-duration   | 数字  | 声音时长，单位秒
-play_count | 数字 | 播放数 
-favorite_count | 数字 | 喜欢数 
-comment_count |  数字  |评论数
-download_count | 数字 |下载次数
-play_url_32 | 字符串 | 播放地址32位
-play_size_32   | 数字 | 32位声音文件大小
-play_url_24_m4a | 字符串 | 声音m4a格式24位地址
-play_size_24_m4a  |  数字 |声音m4a格式24位大小
-can_download  |  Bool   | 可否下载，true-可下载，false-不可下载
-download_url  |  数字 | 声音下载地址
-download_size | 数字 | 声音下载大小
-order_num  | 数字 | 一条声音在一个专辑中的位置
+total_count | 数字 | 声音总个数
+total_page | 数字 | 声音总页数
+tracks | JSON | [声音列表](#track)
 
 ```js
 {
-  "result": [
+  "total_count": 396,
+  "total_page": 132,
+  "tracks": [
     {
-      "id": 0,
+      "id": 17567064,
       "kind": "track",
-      "track_title": "日本小孩子为什么没人想当老板？",
-      "track_tags": "",
-      "track_intro": "",
-      "cover_url_small": "http://fdfs.xmcdn.com/group6/M07/AE/95/wKgDg1dzg5yzi7tOAACL4yEqAYg563_web_meduim.jpg",
-      "cover_url_middle": "http://fdfs.xmcdn.com/group6/M07/AE/95/wKgDg1dzg5yzi7tOAACL4yEqAYg563_web_large.jpg",
-      "cover_url_large": "http://fdfs.xmcdn.com/group6/M07/AE/95/wKgDg1dzg5yzi7tOAACL4yEqAYg563_mobile_large.jpg",
-      "duration": 720,
-      "play_count": 243096,
-      "favorite_count": 649,
-      "comment_count": 401,
+      "track_title": "夏日酷热，听清凉的Bossa Nova（上）~优品音乐104",
+      "track_tags": "爵士",
+      "track_intro": "玫瑰色的七四七 - 彭靖惠 蓝旗袍 - 范晓萱 南屏晚钟 - 蔡淳佳 梦里人 - 陈百强 三个人的晚餐 - 王若琳 明天你是否依然爱我 - 潘越云",
+      "cover_url_small": "http://fdfs.xmcdn.com/group4/M05/A5/7F/wKgDtFd0akzzjYI0AAFCS2M5dWU382_web_meduim.jpg",
+      "cover_url_middle": "http://fdfs.xmcdn.com/group4/M05/A5/7F/wKgDtFd0akzzjYI0AAFCS2M5dWU382_web_large.jpg",
+      "cover_url_large": "http://fdfs.xmcdn.com/group4/M05/A5/7F/wKgDtFd0akzzjYI0AAFCS2M5dWU382_mobile_large.jpg",
+      "announcer": {
+        "id": 7327678,
+        "vcategory_id": 0,
+        "nickname": "叶子的音乐纪念册",
+        "avatar_url": "http://fdfs.xmcdn.com/group3/M0A/32/07/wKgDsVMTC2yjFJhMAAIzUhpL4Aw998_web_large.jpg",
+        "follower_count": 0,
+        "following_count": 0,
+        "released_album_count": 0,
+        "released_track_count": 0,
+        "is_verified": true
+      },
+      "duration": 1647,
+      "play_count": 10050,
+      "favorite_count": 19,
+      "comment_count": 3,
       "download_count": 0,
-      "play_url_32": "http://fdfs.xmcdn.com/group8/M0B/A1/2A/wKgDYFdziISj_o6YACv05VJsKB8557.mp3",
-      "play_size_32": 2880741,
-      "play_url_24_m4a": "http://audio.xmcdn.com/group7/M01/A1/B7/wKgDWldzhoiA1TMdACIHfGiWyxA508.m4a",
-      "play_size_24_m4a": "2230140",
+      "play_url_32": "http://fdfs.xmcdn.com/group13/M03/9E/C7/wKgDXldvo0nDoozzAGSNGpgF97Q640.mp3",
+      "play_size_32": 6589722,
+      "play_url_64": "http://fdfs.xmcdn.com/group13/M03/9E/E1/wKgDXVdvo1Xi1xlmAMkZ6omVxGg077.mp3",
+      "play_size_64": 13179370,
+      "play_url_24_m4a": "http://audio.xmcdn.com/group13/M03/9E/E1/wKgDXVdvo0ODKmPcAE3QNFI7tNU018.m4a",
+      "play_size_24_m4a": "5099572",
+      "play_url_64_m4a": "http://audio.xmcdn.com/group13/M06/9E/C7/wKgDXldvo1nQCRb2AMuBat1FXF8306.m4a",
+      "play_size_64_m4a": "13336938",
       "can_download": true,
-      "download_url": "http://download.xmcdn.com/group6/M07/AA/86/wKgDhFdzg6WQpGL_AC2cjZTaqhg590.aac",
-      "download_size": 2989197,
-      "order_num": 0
+      "download_url": "http://download.xmcdn.com/group9/M05/9E/53/wKgDYldvozjTyLTiAGhWw8uY6DU027.aac",
+      "download_size": 6837955,
+      "order_num": 3,
+      "subordinated_album": {
+        "id": 2650009,
+        "album_title": "音乐优品",
+        "cover_url_small": "http://fdfs.xmcdn.com/group7/M07/8A/EB/wKgDWldWrWfyrAyDAAJLp6xUS-k951_mobile_small.jpg",
+        "cover_url_middle": "http://fdfs.xmcdn.com/group7/M07/8A/EB/wKgDWldWrWfyrAyDAAJLp6xUS-k951_mobile_meduim.jpg",
+        "cover_url_large": "http://fdfs.xmcdn.com/group7/M07/8A/EB/wKgDWldWrWfyrAyDAAJLp6xUS-k951_mobile_large.jpg"
+      },
+      "source": 1,
+      "updated_at": 1467849575000,
+      "created_at": 1466934452000
     }
   ]
 }
@@ -402,7 +542,7 @@ err：
 ```js
 {
   "code": 9002,
-  "message": "uninitialized"
+  "message": "Uninitialized"
 }
 ```
 
@@ -411,15 +551,16 @@ err：
 ```js
 var ximalaya = api.require('ximalaya');
 var param = {
-    categoryid: "1",
-    page: 1,
-    pagesize: 2
+    categoryid: 2,
+    tagname: "爵士",
+    page:1,
+    pagesize:3
 };
 ximalaya.getHotTracks(param, function(ret, err) {
     if (ret)
-        alert(JSON.stringify(ret));
+        console.log(JSON.stringify(ret));
     else
-        alert(JSON.stringify(err));
+        console.log(JSON.stringify(err));
 });
 ```
 
@@ -449,6 +590,12 @@ categoryid：
 - 默认值：无
 - 描述：分类ID，指定分类，为0时表示热门分类
 
+tagname：
+
+- 类型：字符串
+- 默认值：无
+- 描述：分类下对应声音标签，不填则为热门分类
+
 calcdimension：
 
 - 类型：数字
@@ -475,33 +622,48 @@ ret：
 
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-id | 数字 | ID
-album_title | 字符串 | 专辑名称
-album_tags | 字符串 | 专辑标签列表
-album_intro | 字符串 | 专辑简介
-cover_url_small  |  字符串 | 声音封面小图
-cover_url_middle  |  字符串 | 声音封面中图
-cover_url_large | 字符串 | 声音封面大图
-play_count | 字符串 | 专辑播放次数
-favorite_count | 字符串 | 专辑喜欢数
-include_track_count | 字符串 | 专辑包含声音数
-can_download | Bool | 能否下载，true-可下载，false-不可下载
+total_count | 数字 | 专辑总个数
+total_page | 数字 | 专辑总页数
+albums | JSON | [专辑列表](#album)
 
 ```js
 {
-  "result": [
+  "total_count": 885,
+  "total_page": 89,
+  "albums": [
     {
-      "id": 392497,
-      "album_title": "老赵说天下-话题脱口秀",
-      "album_tags": "",
-      "album_intro": "《老赵说天下》新潮时讯 脱口秀 一天一个话题 互动QQ群1149391",
-      "cover_url_small": "http://fdfs.xmcdn.com/group16/M02/5E/A7/wKgDbFcrI_fBGDk5AAG3wAjciBU628_mobile_small.jpg",
-      "cover_url_middle": "http://fdfs.xmcdn.com/group16/M02/5E/A7/wKgDbFcrI_fBGDk5AAG3wAjciBU628_mobile_meduim.jpg",
-      "cover_url_large": "http://fdfs.xmcdn.com/group16/M02/5E/A7/wKgDbFcrI_fBGDk5AAG3wAjciBU628_mobile_large.jpg",
-      "play_count": 5390495,
+      "id": 259608,
+      "album_title": "音乐大明星",
+      "album_tags": "华语,流行,大明星,音乐大明星,音乐",
+      "album_intro": "最棒的音乐，最大牌的明星，音乐大明星！ ！！",
+      "cover_url_small": "http://fdfs.xmcdn.com/group11/M09/A0/E1/wKgDbVdkvXPj7tlcAASejY-0bwM580_mobile_small.jpg",
+      "cover_url_middle": "http://fdfs.xmcdn.com/group11/M09/A0/E1/wKgDbVdkvXPj7tlcAASejY-0bwM580_mobile_meduim.jpg",
+      "cover_url_large": "http://fdfs.xmcdn.com/group11/M09/A0/E1/wKgDbVdkvXPj7tlcAASejY-0bwM580_mobile_large.jpg",
+      "announer": {
+        "id": 10454766,
+        "vcategory_id": 0,
+        "nickname": "音乐大明星",
+        "avatar_url": "http://fdfs.xmcdn.com/group5/M05/69/5B/wKgDtlRZf7-zuwtRAA1dzBlF_vE351_web_large.jpg",
+        "follower_count": 0,
+        "following_count": 0,
+        "released_album_count": 0,
+        "released_track_count": 0,
+        "is_verified": true
+      },
+      "play_count": 33333725,
       "favorite_count": 0,
-      "include_track_count": 226,
-      "can_download": true
+      "include_track_count": 189,
+      "track_id": {
+        "track_id": 18024973,
+        "track_title": "SNH48做DJ，微信公众号FunRadio。萌妹子青春逼人，夏天纳凉必备！-2016034",
+        "duration": 752,
+        "created_at": 1467881426000,
+        "updated_at": 1467798106000
+      },
+      "is_finished": 0,
+      "can_download": true,
+      "updated_at": 1467881426000,
+      "created_at": 1402299017000
     }
   ]
 }
@@ -516,7 +678,7 @@ err：
 ```js
 {
   "code": 9002,
-  "message": "uninitialized"
+  "message": "Uninitialized"
 }
 ```
 
@@ -589,51 +751,62 @@ ret：
 
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-track_title | 字符串 | 声音名称
-track_tags | 字符串 | 声音标签列表
-track_intro | 字符串 | 声音简介
-cover_url_small | 字符串 | 声音封面小图
-cover_url_middle  |  字符串 | 声音封面中图
-cover_url_large | 字符串 | 声音封面大图
-duration   | 数字  | 声音时长，单位秒
-play_count | 数字 | 播放数 
-favorite_count | 数字 | 喜欢数 
-comment_count |  数字  |评论数
-download_count | 数字 |下载次数
-play_url_32 | 字符串 | 播放地址32位
-play_size_32   | 数字 | 32位声音文件大小
-play_url_24_m4a | 字符串 | 声音m4a格式24位地址
-play_size_24_m4a  |  数字 |声音m4a格式24位大小
-can_download  |  Bool   | 可否下载，true-可下载，false-不可下载
-download_url  |  数字 | 声音下载地址
-download_size | 数字 | 声音下载大小
-order_num  | 数字 | 一条声音在一个专辑中的位置
+total_count | 数字 | 声音总个数
+total_page | 数字 | 声音总页数
+tracks | JSON | [声音列表](#track)
 
 ```js
 {
-  "result": [
+  "total_count": 726,
+  "total_page": 363,
+  "tracks": [
     {
-      "id": 0,
+      "id": 17727441,
       "kind": "track",
-      "track_title": "【财经火眼】商务部：富士进口相纸反倾销新税率今起征",
+      "track_title": "【国际风云】土耳其政策转变导致其与IS反目成仇",
       "track_tags": "",
       "track_intro": "",
-      "cover_url_small": "http://fdfs.xmcdn.com/group13/M06/A2/83/wKgDXld0fkPyM4VjAACP7yfFdQs951_web_meduim.png",
-      "cover_url_middle": "http://fdfs.xmcdn.com/group13/M06/A2/83/wKgDXld0fkPyM4VjAACP7yfFdQs951_web_large.png",
-      "cover_url_large": "http://fdfs.xmcdn.com/group13/M06/A2/83/wKgDXld0fkPyM4VjAACP7yfFdQs951_mobile_large.png",
-      "duration": 96,
-      "play_count": 5109,
-      "favorite_count": 1,
+      "cover_url_small": "http://fdfs.xmcdn.com/group10/M00/9D/6C/wKgDZ1d0foLw3dMTAAOvpIJHvI8367_web_meduim.png",
+      "cover_url_middle": "http://fdfs.xmcdn.com/group10/M00/9D/6C/wKgDZ1d0foLw3dMTAAOvpIJHvI8367_web_large.png",
+      "cover_url_large": "http://fdfs.xmcdn.com/group10/M00/9D/6C/wKgDZ1d0foLw3dMTAAOvpIJHvI8367_mobile_large.png",
+      "announcer": {
+        "id": 36193304,
+        "vcategory_id": 0,
+        "nickname": "头条滚出来",
+        "avatar_url": "http://fdfs.xmcdn.com/group10/M07/CB/31/wKgDaVZxIG7y6MciAADXlSjVU68904_web_large.jpg",
+        "follower_count": 0,
+        "following_count": 0,
+        "released_album_count": 0,
+        "released_track_count": 0,
+        "is_verified": true
+      },
+      "duration": 89,
+      "play_count": 5640,
+      "favorite_count": 0,
       "comment_count": 0,
       "download_count": 0,
-      "play_url_32": "http://fdfs.xmcdn.com/group5/M0A/94/8E/wKgDtld0WGPCRHE3AAXf2BQyNw0067.mp3",
-      "play_size_32": 384984,
-      "play_url_24_m4a": "http://audio.xmcdn.com/group5/M00/95/F0/wKgDtVd0WGTyVTg1AASMsnbNtUY458.m4a",
-      "play_size_24_m4a": "298162",
+      "play_url_32": "http://fdfs.xmcdn.com/group8/M02/A1/8C/wKgDYVd0Vu7RNhCaAAV72IgN3Zg333.mp3",
+      "play_size_32": 359384,
+      "play_url_64": "http://fdfs.xmcdn.com/group8/M08/A1/BF/wKgDYFd0Vu7Dr_IJAAr3G7nAmYQ948.mp3",
+      "play_size_64": 718619,
+      "play_url_24_m4a": "http://audio.xmcdn.com/group8/M02/A1/8C/wKgDYVd0Vu6QMHhRAAQ_3JcFizg903.m4a",
+      "play_size_24_m4a": "278492",
+      "play_url_64_m4a": "http://audio.xmcdn.com/group8/M08/A1/BF/wKgDYFd0Vu7jh39fAAsZoprR7eE932.m4a",
+      "play_size_64_m4a": "727458",
       "can_download": true,
-      "download_url": "http://download.xmcdn.com/group5/M00/95/F0/wKgDtVd0WGPizeF8AAXiA0ib02g916.aac",
-      "download_size": 385539,
-      "order_num": 3
+      "download_url": "http://download.xmcdn.com/group8/M02/A1/8C/wKgDYVd0Vu7hZFs_AAV91aDQ71A294.aac",
+      "download_size": 359893,
+      "order_num": 2,
+      "subordinated_album": {
+        "id": 3985798,
+        "album_title": "头条滚出来2016年7月专辑",
+        "cover_url_small": "http://fdfs.xmcdn.com/group15/M06/34/66/wKgDaFb9rQ2zsGgKAABHpjuAWcs136_mobile_small.jpg",
+        "cover_url_middle": "http://fdfs.xmcdn.com/group15/M06/34/66/wKgDaFb9rQ2zsGgKAABHpjuAWcs136_mobile_meduim.jpg",
+        "cover_url_large": "http://fdfs.xmcdn.com/group15/M06/34/66/wKgDaFb9rQ2zsGgKAABHpjuAWcs136_mobile_large.jpg"
+      },
+      "source": 2,
+      "updated_at": 1467854459000,
+      "created_at": 1467242253000
     }
   ]
 }
@@ -648,7 +821,7 @@ err：
 ```js
 {
   "code": 9002,
-  "message": "uninitialized"
+  "message": "Uninitialized"
 }
 ```
 
@@ -660,13 +833,461 @@ var param = {
     albumid: 3985798,
     sort: "desc",
     page: 2,
-    pagesize: 3           
+    pagesize: 2
 };
 ximalaya.getTracks(param, function(ret, err) {
     if (ret)
-        alert(JSON.stringify(ret));
+        console.log(JSON.stringify(ret));
     else
-        alert(JSON.stringify(err));
+        console.log(JSON.stringify(err));
+});
+```
+
+##补充说明
+
+    无
+
+##可用性
+
+    Android系统, iOS系統
+
+    可提供的1.0.0及更高版本
+
+#**getProvinces**
+<div id="getProvinces"></div>
+
+    获取直播省市列表
+
+    getProvinces(function(ret, err))
+
+##callback(ret,err)
+
+ret：
+
+- 类型：JSON对象
+
+- 说明：provinces | JSON | [直播省市列表](#Province)
+
+```js
+{
+  "provinces": [
+    {
+      "id": 1,
+      "province_code": 110000,
+      "province_name": "北京",
+      "created_at": 1468208401425
+    },
+    {
+      "id": 2,
+      "province_code": 120000,
+      "province_name": "天津",
+      "created_at": 1468208401425
+    }
+  ]
+}
+```
+
+err：
+
+- 类型：JSON对象
+
+内部字段：
+
+```js
+{
+  "code": 9002,
+  "message": "Uninitialized"
+}
+```
+
+##示例代码
+
+```js
+var ximalaya = api.require('ximalaya');
+ximalaya.getProvinces(function(ret, err) {
+    if (ret)
+        console.log(JSON.stringify(ret));
+    else
+        console.log(JSON.stringify(err));
+});
+```
+
+##补充说明
+
+    无
+
+##可用性
+
+    Android系统, iOS系統
+
+    可提供的1.0.0及更高版本
+
+#**getRadios**
+<div id="getRadios"></div>
+
+    获取直播省市列表
+
+    getRadios({params}, function(ret, err))
+##params
+
+radiotype：
+
+- 类型：数字
+- 默认值：无
+- 描述：电台类型：1-国家台，2-省市台，3-网络台
+
+provincecode：
+
+- 类型：数字
+- 默认值：无
+- 描述：省份代码，radio_type为2时不能为空
+
+page：
+
+- 类型：数字
+- 默认值：1
+- 描述：返回第几页，必须大于等于1，不填默认为1
+
+pagesize：
+
+- 类型：数字
+- 默认值：10
+- 描述：返回的每页的条数
+
+##callback(ret,err)
+
+ret：
+
+- 类型：JSON对象
+
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+total_count | 数字 | 专辑总个数
+total_page | 数字 | 专辑总页数
+radios | JSON | [直播电台列表](#radio)
+
+```js
+{
+  "total_count": 21,
+  "total_page": 11,
+  "radios": [
+    {
+      "id": 55,
+      "radio_name": "上海Love Radio",
+      "radio_desc": "",
+      "program_name": "音乐爱当家",
+      "schedule_id": 66241,
+      "start_time": 0,
+      "end_time": 0,
+      "support_bitrates": [
+        24,
+        64
+      ],
+      "rate24_aac_url": "http://live.xmcdn.com/live/55/24.m3u8",
+      "rate24_ts_url": "http://live.xmcdn.com/live/55/24.m3u8?transcode=ts",
+      "rate64_aac_url": "http://live.xmcdn.com/live/55/64.m3u8",
+      "rate64_ts_url": "http://live.xmcdn.com/live/55/64.m3u8?transcode=ts",
+      "radio_play_count": 377110,
+      "cover_url_small": "http://fdfs.xmcdn.com/group6/M07/84/C3/wKgDhFT_ojPTjAwDAAB4jvN3ySk144_mobile_small.jpg",
+      "cover_url_large": "http://fdfs.xmcdn.com/group6/M07/84/C3/wKgDhFT_ojPTjAwDAAB4jvN3ySk144_mobile_large.jpg",
+      "updated_at": 0
+    },
+    {
+      "id": 59,
+      "radio_name": "上海交通广播电台",
+      "radio_desc": "",
+      "program_name": "1057大家帮",
+      "schedule_id": 140852,
+      "start_time": 0,
+      "end_time": 0,
+      "support_bitrates": [
+        24,
+        64
+      ],
+      "rate24_aac_url": "http://live.xmcdn.com/live/59/24.m3u8",
+      "rate24_ts_url": "http://live.xmcdn.com/live/59/24.m3u8?transcode=ts",
+      "rate64_aac_url": "http://live.xmcdn.com/live/59/64.m3u8",
+      "rate64_ts_url": "http://live.xmcdn.com/live/59/64.m3u8?transcode=ts",
+      "radio_play_count": 272782,
+      "cover_url_small": "http://fdfs.xmcdn.com/group6/M05/88/B6/wKgDg1T_ovnBV-ZGAACMhbWr3WA680_mobile_small.jpg",
+      "cover_url_large": "http://fdfs.xmcdn.com/group6/M05/88/B6/wKgDg1T_ovnBV-ZGAACMhbWr3WA680_mobile_large.jpg",
+      "updated_at": 0
+    }
+  ]
+}
+```
+
+err：
+
+- 类型：JSON对象
+
+内部字段：
+
+```js
+{
+  "code": 9002,
+  "message": "Uninitialized"
+}
+```
+
+##示例代码
+
+```js
+var param = {
+  radiotype:2,
+  provincecode:310000,
+  page: 2,
+  pagesize: 2
+};
+ximalaya.getRadios(param, function(ret, err){
+  if(ret)
+    console.log(JSON.stringify(ret));
+  else
+    console.log(JSON.stringify(err));
+});
+```
+
+##补充说明
+
+    无
+
+##可用性
+
+    Android系统, iOS系統
+
+    可提供的1.0.0及更高版本
+
+#**XmPlayerInit**
+<div id="XmPlayerInit"></div>
+
+    初始化播放器
+
+    XmPlayerInit(function(ret, err))
+
+##callback(ret,err)
+
+ret：
+
+- 类型：JSON对象
+
+- 说明：provinces | JSON | [直播省市列表](#Province)
+
+```js
+{
+  "code":0,
+  "message":"success"
+}
+```
+
+err：
+
+- 类型：JSON对象
+
+内部字段：
+
+```js
+{
+  "code": 9002,
+  "message": "Uninitialized"
+}
+```
+
+##示例代码
+
+```js
+ximalaya.XmPlayerInit(function(ret, err){
+  if(ret)
+    console.log(JSON.stringify(ret));
+  else
+    console.log(JSON.stringify(err));
+});
+```
+
+##补充说明
+
+    无
+
+##可用性
+
+    Android系统, iOS系統
+
+    可提供的1.0.0及更高版本
+
+<!-- ----------------------------     -->
+    
+#**XmPlayerPlay**
+<div id="XmPlayerPlay"></div>
+
+    获取直播省市列表
+
+    XmPlayerPlay({params}, function(ret, err))
+
+##params
+
+index：
+
+- 类型：数字
+- 默认值：无
+- 描述：getRadios方法会获取一个电台列表，比如上面的[getRadios](#getRadios)方法获取了两个电台(上海Love Radio、上海交通广播电台)，想播放第一个，那么index值传0， 想播放第二个index值传1
+
+##callback(ret,err)
+
+ret：
+
+- 类型：JSON对象
+
+```js
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+err：
+
+- 类型：JSON对象
+
+内部字段：
+
+```js
+{
+  "code": 9002,
+  "message": "Uninitialized"
+}
+
+{
+  "code": 9002,
+  "message": "Player uninitialized"
+}
+
+{
+  "code": 9004,
+  "message": "Radio list is empty"
+}
+```
+
+##示例代码
+
+```js
+var ximalaya = api.require('ximalaya');
+var param = {
+  index:0
+};
+ximalaya.XmPlayerPlay(param, function(ret, err){
+  if(ret)
+    console.log(JSON.stringify(ret));
+  else
+    console.log(JSON.stringify(err));
+});
+```
+
+##补充说明
+
+    无
+
+##可用性
+
+    Android系统, iOS系統
+
+    可提供的1.0.0及更高版本    
+
+#**XmPlayerPause**
+<div id="XmPlayerPause"></div>
+
+    暂停播放
+
+    XmPlayerPause(function(ret, err))
+
+##callback(ret,err)
+
+ret：
+
+- 类型：JSON对象
+
+```js
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+err：
+
+- 类型：JSON对象
+
+内部字段：
+
+```js
+{
+  "code": 9002,
+  "message": "Uninitialized"
+}
+```
+
+##示例代码
+
+```js
+var ximalaya = api.require('ximalaya');
+ximalaya.XmPlayerPause(function(ret, err) {
+    if (ret)
+        console.log("Pause", JSON.stringify(ret));
+    else
+        console.log(JSON.stringify(err));
+});
+```
+
+##补充说明
+
+    无
+
+##可用性
+
+    Android系统, iOS系統
+
+    可提供的1.0.0及更高版本   
+     
+#**XmPlayerStop**
+<div id="XmPlayerStop"></div>
+
+    停止播放
+
+    XmPlayerStop(function(ret, err))
+
+##callback(ret,err)
+
+ret：
+
+- 类型：JSON对象
+
+```js
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+err：
+
+- 类型：JSON对象
+
+内部字段：
+
+```js
+{
+  "code": 9002,
+  "message": "Uninitialized"
+}
+```
+
+##示例代码
+
+```js
+var ximalaya = api.require('ximalaya');
+ximalaya.XmPlayerStop(function(ret, err) {
+    if (ret)
+        console.log("Stop", JSON.stringify(ret));
+    else
+        console.log(JSON.stringify(err));
 });
 ```
 
@@ -690,3 +1311,122 @@ code | 描述
 9001 | 已经初始化了
 9002 | 未初始化
 9003 | JSON组装异常
+9004 | 播放器列表为空
+
+<div id="track"></div>
+#**track**
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+total_count | 数字 | 声音总个数
+total_page | 数字 | 声音总页数
+tracks | json | 声音列表
+||
+id | 数字 | 声音ID
+track_title | 字符串 | 声音名称
+track_tags | 字符串 | 声音标签列表
+track_intro | 字符串 | 声音简介
+cover_url_small | 字符串 | 声音封面小图
+cover_url_middle  |  字符串 | 声音封面中图
+cover_url_large | 字符串 | 声音封面大图
+announcer | JSON | [专辑所属主播信息](#announcer)
+duration   | 数字  | 声音时长，单位秒
+play_count | 数字 | 播放数 
+favorite_count | 数字 | 喜欢数 
+comment_count |  数字  |评论数
+download_count | 数字 |下载次数
+play_url_32 | 字符串 | 播放地址32位
+play_size_32   | 数字 | 32位声音文件大小
+play_url_64 | 字符串 | 播放地址64位
+play_size_64   | 数字 | 64位声音文件大小
+play_url_24_m4a | 字符串 | 声音m4a格式24位地址
+play_size_24_m4a  |  数字 |声音m4a格式24位大小
+play_url_64_m4a | 字符串 | 声音m4a格式64位地址
+play_size_64_m4a  |  数字 |声音m4a格式64位大小
+can_download  |  Bool   | 可否下载，true-可下载，false-不可下载
+download_url  |  数字 | 声音下载地址
+download_size | 数字 | 声音下载大小
+order_num  | 数字 | 一条声音在一个专辑中的位置
+subordinated_album  | JSON | [声音所属专辑信息](#SubordinatedAlbum)
+source  | 数字 | 声音来源，1-用户原创，2-用户转采
+updated_at  | 数字 | 声音更新时间，Unix毫秒数时间戳
+created_at  | 数字 | 声音创建时间，Unix毫秒数时间戳
+
+<div id="announcer"></div>
+#**announcer**
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+id | 数字 | 主播用户ID
+vcategory_id | 数字 | 主播分类ID
+nickname | 字符串 | 主播用户昵称
+avatar_url | 字符串 | 主播头像
+is_verified | Boolean | 主播是否加V
+
+<div id="SubordinatedAlbum"></div>
+#**subordinated_album**
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+id | 数字 | ID
+album_title | 字符串 | 专辑名称
+cover_url_small | 字符串 | 专辑封面小，无则返回空字符串””
+cover_url_middle | 字符串 | 专辑封面中，无则返回空字符串””
+cover_url_large | 字符串 | 专辑封面大，无则返回空字符串””
+
+<div id="Category"></div>
+#**Category**
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+order_num | 数字 | 排序值，值越小排序越在前
+category_name | 字符串 | 分类名
+cover_url_small | 字符串 | 分类封面小图
+cover_url_middle | 字符串 | 分类封面中图
+cover_url_large | 字符串 | 分类封面大图
+
+<div id="album"></div>
+#**album**
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+id | 数字 | ID
+album_title | 字符串 | 专辑名称
+album_tags | 字符串 | 专辑标签列表
+album_intro | 字符串 | 专辑简介
+cover_url_small  |  字符串 | 声音封面小图
+cover_url_middle  |  字符串 | 声音封面中图
+cover_url_large | 字符串 | 声音封面大图
+announcer | JSON | [专辑所属主播信息](#announcer)
+play_count | 字符串 | 专辑播放次数
+favorite_count | 字符串 | 专辑喜欢数
+include_track_count | 字符串 | 专辑包含声音数
+track_id | JSON | [专辑中最新上传的一条声音信息](#track)
+can_download | Bool | 能否下载，true-可下载，false-不可下载
+updated_at  | 数字 | 声音更新时间，Unix毫秒数时间戳
+created_at  | 数字 | 声音创建时间，Unix毫秒数时间戳
+
+<div id="Province"></div>
+#**Province**
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+id | 数字 | 省市ID
+province_code | 数字 | 省市代码，比如110000
+province_name | 字符串 | 省市名称，比如”北京”、”河北”
+created_at | 数字 | 创建时间，Unix毫秒数时间戳
+
+<div id="radio"></div>
+#**radio**
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+id | 数字 | 声音ID
+radio_name | 数字 | 电台名称
+radio_desc | 字符串 | 电台简介
+program_name | 字符串 | 正在直播的节目名称
+schedule_id | 数字 | 正在直播的节目时间表ID
+start_time | 数字 | 节目开始时间，比如”09:00”
+end_time | 数字 | 节目结束时间，比如”10:00”
+support_bitrates | Array | 支持的码率列表，如[24,64]
+rate24_aac_url | 字符串 | 24码率aac格式播放地址
+rate24_ts_url | 字符串 | 24码率ts格式播放地址
+rate64_aac_url | 字符串 | 64码率aac格式播放地址
+rate64_ts_url | 字符串 | 64码率ts格式播放地址
+radio_play_count | 数字 | 电台累计收听次数
+cover_url_small | 字符串 | 电台封面小图
+cover_url_large | 字符串 | 电台封面大图
+updated_at | 数字 | 声音更新时间，Unix毫秒数时间戳
