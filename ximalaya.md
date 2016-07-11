@@ -11,6 +11,7 @@ Description: ximalaya
    
 <div id="method-content"></div>
 
+<div class="outline">
 
 [initXmly](#initXmly)
 
@@ -38,8 +39,6 @@ Description: ximalaya
 
 [XmPlayerStop](#XmPlayerStop)
 
-[错误码](#errcode)
-
 [track](#track)
 
 [announcer](#announcer)
@@ -54,6 +53,9 @@ Description: ximalaya
 
 [radio](#radio)
 
+[错误码](#errcode)
+
+</div>
 
 ##**概述**
 
@@ -215,11 +217,11 @@ keyword：
 
 - 类型：字符串
 - 默认值：无
-- 描述：喜马拉雅开发平台申请我的应用时候得到的appsecret，[我的应用](http://open.ximalaya.com/apps)
+- 描述：搜索关键词
 
 categoryid：
 
-- 类型：字符串
+- 类型：数字
 - 默认值：无，
 - 描述：分类ID，不填或者为0检索全库
 
@@ -584,7 +586,7 @@ ximalaya.getHotTracks(param, function(ret, err) {
 
 categoryid：
 
-- 类型：字符串
+- 类型：数字
 - 默认值：无
 - 描述：分类ID，指定分类，为0时表示热门分类
 
@@ -684,16 +686,17 @@ err：
 
 ```js
 var param = {
-    categoryid: "1",
-    calcdimension: 1,
-    page: 2,
-    pagesize: 5
+    categoryid: 2,
+    tagname: "流行",
+    calcdimension: 3,
+    page: 1,
+    pagesieze: 8
 };
 ximalaya.getAlbumlist(param, function(ret, err) {
     if (ret)
-        alert(JSON.stringify(ret));
+        console.log(JSON.stringify(ret));
     else
-        alert(JSON.stringify(err));
+        console.log(JSON.stringify(err));
 });
 ```
 
@@ -1068,8 +1071,6 @@ ret：
 
 - 类型：JSON对象
 
-- 说明：provinces | JSON | [直播省市列表](#Province)
-
 ```js
 {
   "code":0,
@@ -1111,12 +1112,10 @@ ximalaya.XmPlayerInit(function(ret, err){
 
     可提供的1.0.0及更高版本
 
-<!-- ----------------------------     -->
-    
 #**XmPlayerPlay**
 <div id="XmPlayerPlay"></div>
 
-    获取直播省市列表
+    使用播放器播放音乐电台(且只能播放电台的声音)
 
     XmPlayerPlay({params}, function(ret, err))
 
@@ -1299,20 +1298,8 @@ ximalaya.XmPlayerStop(function(ret, err) {
 
     可提供的1.0.0及更高版本
 
-<div id="errcode"></div>
-#**错误码**
-
-code | 描述
-:-----------  | :-------------:
-0 | 请求成功
-9400 | 参数错误
-9001 | 已经初始化了
-9002 | 未初始化
-9003 | JSON组装异常
-9004 | 播放器列表为空
-
 <div id="track"></div>
-#**track**
+#**track参数说明**
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 total_count | 数字 | 声音总个数
@@ -1350,7 +1337,7 @@ updated_at  | 数字 | 声音更新时间，Unix毫秒数时间戳
 created_at  | 数字 | 声音创建时间，Unix毫秒数时间戳
 
 <div id="announcer"></div>
-#**announcer**
+#**announcer参数说明**
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 id | 数字 | 主播用户ID
@@ -1360,7 +1347,7 @@ avatar_url | 字符串 | 主播头像
 is_verified | Boolean | 主播是否加V
 
 <div id="SubordinatedAlbum"></div>
-#**subordinated_album**
+#**subordinated_album参数说明**
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 id | 数字 | ID
@@ -1370,7 +1357,7 @@ cover_url_middle | 字符串 | 专辑封面中，无则返回空字符串””
 cover_url_large | 字符串 | 专辑封面大，无则返回空字符串””
 
 <div id="Category"></div>
-#**Category**
+#**Category参数说明**
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 order_num | 数字 | 排序值，值越小排序越在前
@@ -1380,7 +1367,7 @@ cover_url_middle | 字符串 | 分类封面中图
 cover_url_large | 字符串 | 分类封面大图
 
 <div id="album"></div>
-#**album**
+#**album参数说明**
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 id | 数字 | ID
@@ -1400,7 +1387,7 @@ updated_at  | 数字 | 声音更新时间，Unix毫秒数时间戳
 created_at  | 数字 | 声音创建时间，Unix毫秒数时间戳
 
 <div id="Province"></div>
-#**Province**
+#**Province参数说明**
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 id | 数字 | 省市ID
@@ -1409,7 +1396,7 @@ province_name | 字符串 | 省市名称，比如”北京”、”河北”
 created_at | 数字 | 创建时间，Unix毫秒数时间戳
 
 <div id="radio"></div>
-#**radio**
+#**radio参数说明**
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 id | 数字 | 声音ID
@@ -1428,3 +1415,15 @@ radio_play_count | 数字 | 电台累计收听次数
 cover_url_small | 字符串 | 电台封面小图
 cover_url_large | 字符串 | 电台封面大图
 updated_at | 数字 | 声音更新时间，Unix毫秒数时间戳
+
+<div id="errcode"></div>
+#**错误码**
+
+code | 描述
+:-----------  | :-------------:
+0 | 请求成功
+9400 | 参数错误
+9001 | 已经初始化了
+9002 | 未初始化
+9003 | JSON组装异常
+9004 | 播放器列表为空
