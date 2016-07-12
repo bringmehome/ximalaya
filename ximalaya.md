@@ -61,6 +61,12 @@ Description: ximalaya
 
 ##params
 
+appkey：
+
+- 类型：字符串
+- 默认值：无(代码中可以传，只是android不获取)
+- 描述：只有iOS需要传这个参数，android的是放在自定义模块里的配置文件中的，参考<a href="https://github.com/bringmehome/ximalaya" target="_blank">GitHub接入教程</a>
+
 appsecret：
 
 - 类型：字符串
@@ -100,6 +106,7 @@ err：
 ```js
 var ximalaya = api.require('ximalaya');
 var param = {
+    appkey : "6c69a58001f9fa7a63731f7ce0fb1f3c",
     appsecret:"e1f6e1927fdab1ef1a8de1997557b6db"
 };
 ximalaya.initXmly(param, function(ret, err){
