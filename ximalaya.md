@@ -7,11 +7,12 @@ Description: ximalaya
 
 <ul id="tab" class="clearfix">
   <li class="active"><a href="#method-content">Method</a></li>
+  <li><a href="#method-content2">参数列表</a></li>
 </ul>
    
-<div id="method-content"></div>
+<div id="method-content">
 
-<!-- <div class="outline"> -->
+<div class="outline">
 
 [initXmly](#initXmly)
 
@@ -38,24 +39,9 @@ Description: ximalaya
 [XmPlayerPause](#XmPlayerPause)
 
 [XmPlayerStop](#XmPlayerStop)
+</div>
 
-[track](#track)
 
-[announcer](#announcer)
-
-[album](#album)
-
-[SubordinatedAlbum](#SubordinatedAlbum)
-
-[Category](#Category)
-
-[Province](#Province)
-
-[radio](#radio)
-
-[错误码](#errcode)
-
-<!-- </div> -->
 
 ##**概述**
 
@@ -124,13 +110,10 @@ ximalaya.initXmly(param, function(ret, err){
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -194,13 +177,11 @@ ximalaya.getCategories(function(ret, err){
 });
 ```
 
-##补充说明
 
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -337,13 +318,11 @@ ximalaya.getSearchedTracks(param, function(ret, err){
 });
 ```
 
-##补充说明
 
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -421,13 +400,11 @@ ximalaya.getTags(param, function(ret, err) {
 });
 ```
 
-##补充说明
 
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -442,7 +419,7 @@ ximalaya.getTags(param, function(ret, err) {
 
 categoryid：
 
-- 类型：数字
+- 类型：字符串
 - 默认值：无
 - 描述：分类ID，指定分类
 
@@ -564,13 +541,10 @@ ximalaya.getHotTracks(param, function(ret, err) {
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -700,13 +674,10 @@ ximalaya.getAlbumlist(param, function(ret, err) {
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -844,13 +815,10 @@ ximalaya.getTracks(param, function(ret, err) {
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -913,13 +881,10 @@ ximalaya.getProvinces(function(ret, err) {
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -1048,13 +1013,10 @@ ximalaya.getRadios(param, function(ret, err){
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -1102,13 +1064,10 @@ ximalaya.XmPlayerInit(function(ret, err){
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
 
@@ -1178,13 +1137,10 @@ ximalaya.XmPlayerPlay(param, function(ret, err){
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本    
 
@@ -1233,13 +1189,10 @@ ximalaya.XmPlayerPause(function(ret, err) {
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本   
      
@@ -1288,15 +1241,36 @@ ximalaya.XmPlayerStop(function(ret, err) {
 });
 ```
 
-##补充说明
-
-    无
 
 ##可用性
 
-    Android系统, iOS系統
+    Android系统
 
     可提供的1.0.0及更高版本
+
+
+</div>
+
+
+
+<div id="method-content2">
+<div class="outline">
+[track](#track)
+
+[announcer](#announcer)
+
+[album](#album)
+
+[SubordinatedAlbum](#SubordinatedAlbum)
+
+[Category](#Category)
+
+[Province](#Province)
+
+[radio](#radio)
+
+[错误码](#errcode)
+</div>
 
 <div id="track"></div>
 #**track参数说明**
