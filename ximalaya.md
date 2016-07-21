@@ -136,7 +136,7 @@ ximalaya.initXmly(param, function(ret, err){
 ret：
 
 - 类型：JSON对象
-- 说明：categories [内容分类](#category)
+- 说明：categories [内容分类](#Category)
 
 ```js
 {
